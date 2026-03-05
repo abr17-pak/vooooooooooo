@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Vote Haider for House Captain</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Merriweather&display=swap" rel="stylesheet">
+<style>
+html, body{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:black;font-family:'Poppins',sans-serif;}
+.page{position:absolute;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;transition:opacity 1s ease;}
+.hidden{display:none;}
+.background{position:absolute;width:100%;height:100%;display:flex;flex-wrap:wrap;opacity:0.08;font-weight:900;font-size:50px;z-index:1;pointer-events:none;transform:rotate(-25deg);}
+.background span{margin:10px;animation:floatText 5s infinite ease-in-out;color:#ff1a1a;}
+@keyframes floatText{0%{transform:translateY(0px);}50%{transform:translateY(-15px);}100%{transform:translateY(0px);}}
+.center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;}
+.title{font-size:60px;font-weight:900;margin-bottom:50px;color:#ff1a1a;text-align:center;}
+button{padding:25px 50px;margin:15px;font-size:28px;font-weight:bold;border:none;border-radius:15px;cursor:pointer;transition:0.3s;width:320px;}
+button:hover{transform:scale(1.07);}
+#yes{background:#ff1a1a;color:black;}
+#no{background:#1a1a1a;color:#ff1a1a;border:2px solid #ff1a1a;}
+.proceed{display:none;background:#ff1a1a;color:black;opacity:0;}
+.fadeIn{animation:fadeIn 2s forwards;}
+@keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
+.poster{width:360px;margin-top:20px;border-radius:10px;}
+.confetti,.flower,.heart,.loveText{position:absolute;font-size:28px;animation:fall linear infinite;}
+@keyframes fall{0%{transform:translateY(-50px);}100%{transform:translateY(110vh);}}
+.box{position:absolute;max-width:650px;padding:25px;border-radius:20px;background:#1a1a1a;color:#ff1a1a;font-family:'Merriweather', serif;font-size:19px;line-height:1.6;text-align:left;box-shadow:0 0 30px rgba(255,0,0,0.4);}
+.boxTitle{font-size:28px;font-weight:900;margin-bottom:12px;text-align:center;color:#ff1a1a;font-family:'Poppins',sans-serif;}
+
+/* Music toggle button style */
+#musicToggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 9999;
+    padding: 12px;
+    font-size: 28px;
+    background: #ff1a1a;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#musicToggle:hover {
+    transform: scale(1.1);
+}
+</style>
+</head>
+<body>
+
+<!-- Music toggle button -->
+<button id="musicToggle">🔇</button>
+
+<!-- Audio elements -->
+<audio id="music" loop>
+    <source src="music.mp3.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+<audio id="clickSound">
+    <source src="click.mp3.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page">
+<div class="background" id="bg1"></div>
+<div class="center">
+<div class="title">Vote Haider for House Captain</div>
+<button id="yes">Yes I am voting for Haider 😛</button>
+<button id="no">No Bhar mein jao 💔</button>
+<button id="next" class="proceed">Proceed →</button>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2" class="page hidden">
+<div class="background" id="bg2"></div>
+<img src="poster.png" class="poster">
+<div class="box" id="goalBox">
+<div class="boxTitle">My Goal</div>
+I want to make sure every student feels confident and motivated. As House Captain, I will create a supportive and inclusive environment, encourage participation in sports and activities, and help every student step forward with pride. Leadership is about bringing out the best in everyone while fostering teamwork and energy.
+</div>
+<button id="page2Next" class="proceed" style="margin-top:450px;">Proceed →</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page hidden">
+<div class="background" id="bg3"></div>
+<img src="poster.png" class="poster">
+<div class="box" style="top:20%;left:50%;transform:translate(-50%,0);">
+<div class="boxTitle">Q1: How will you motivate shy students?</div>
+I will encourage them privately first, praise small achievements, and gradually involve them in group activities to boost confidence.
+</div>
+<div class="box" style="top:40%;left:50%;transform:translate(-50%,0);">
+<div class="boxTitle">Q2: How will you handle conflicts in the house?</div>
+I will listen to both sides calmly, mediate fairly, and find solutions that respect everyone’s perspective.
+</div>
+<div class="box" style="top:60%;left:50%;transform:translate(-50%,0);">
+<div class="boxTitle">Q3: What are your main priorities as Captain?</div>
+Ensuring team spirit, fair participation in events, boosting student confidence, and representing house interests responsibly.
+</div>
+<button id="page3Next" class="proceed" style="margin-top:100px;">Proceed →</button>
+</div>
+
+<!-- PAGE 4 -->
+<div id="page4" class="page hidden">
+<div class="background" id="bg4"></div>
+<img src="poster.png" class="poster">
+</div>
+
+<script>
+// Background floating text
+function generateBackground(container, text){
+    let bg = document.getElementById(container);
+    for(let i = 0; i < 500; i++){
+        let span = document.createElement("span");
+        span.innerText = text;
+        bg.appendChild(span);
+    }
+}
+generateBackground("bg1", "Vote for Haider");
+generateBackground("bg2", "THANK YOU");
+generateBackground("bg3", "THANK YOU");
+generateBackground("bg4", "THANK YOU");
+
+// Music control
+const music = document.getElementById("music");
+const toggle = document.getElementById("musicToggle");
+let isPlaying = false;
+
+music.volume = 0.3; // 30% volume - not too loud
+
+toggle.onclick = function() {
+    if (isPlaying) {
+        music.pause();
+        toggle.innerText = "🔇";
+    } else {
+        music.play().catch(function(error) {
+            console.log("Play blocked - normal on first load:", error);
+            // User may need to click anywhere first (browser rule)
+        });
+        toggle.innerText = "🔊";
+    }
+    isPlaying = !isPlaying;
+};
+
+// NO button funny messages
+let no = document.getElementById("no");
+let messages = ["Yar plz🥺", "Aisa na karo🥹", "Sochlo?😡", "Plz🙏💔😭"];
+let count = 0;
+no.onclick = function(){
+    if(count < messages.length){
+        no.innerText = messages[count];
+        count++;
+    }
+    let x = Math.random()*800 - 400;
+    let y = Math.random()*500 - 250;
+    no.style.transform = `translate(${x}px,${y}px)`;
+};
+
+// YES button → confetti + show next
+let yes = document.getElementById("yes");
+let next = document.getElementById("next");
+yes.onclick = function(){
+    // Optional: you can auto-start music here too if you want
+    // music.play().catch(()=>{});
+    // toggle.innerText = "🔊";
+    // isPlaying = true;
+
+    setTimeout(() => {
+        next.style.display = "block";
+        next.classList.add("fadeIn");
+        next.style.marginTop = "30px";
+    }, 1500);
+
+    for(let i = 0; i < 40; i++){
+        let c = document.createElement("div");
+        c.className = "confetti";
+        let emojis = ["🎉","✨","🌟"];
+        c.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+        c.style.left = Math.random()*100 + "vw";
+        c.style.top = "-50px";
+        c.style.animationDuration = (Math.random()*3 + 3) + "s";
+        document.body.appendChild(c);
+    }
+};
+
+// PAGE1 Next
+next.onclick = function(){
+    document.querySelectorAll(".confetti").forEach(c => c.remove());
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+    setTimeout(() => {
+        let btn = document.getElementById("page2Next");
+        btn.style.display = "block";
+        btn.classList.add("fadeIn");
+    }, 2000);
+    setInterval(() => {
+        let f = document.createElement("div");
+        f.className = "flower";
+        f.innerText = "🌸";
+        f.style.left = Math.random()*100 + "vw";
+        f.style.animationDuration = (Math.random()*3 + 3) + "s";
+        document.body.appendChild(f);
+    }, 400);
+};
+
+// PAGE2 Next
+document.getElementById("page2Next").onclick = function(){
+    document.getElementById("page2").classList.add("hidden");
+    document.getElementById("page3").classList.remove("hidden");
+    setTimeout(() => {
+        let btn = document.getElementById("page3Next");
+        btn.style.display = "block";
+        btn.classList.add("fadeIn");
+    }, 2000);
+};
+
+// PAGE3 Next → Page4
+document.getElementById("page3Next").onclick = function(){
+    document.getElementById("clickSound").play();
+    document.getElementById("page3").classList.add("hidden");
+    document.getElementById("page4").classList.remove("hidden");
+    setInterval(() => {
+        let h = document.createElement("div");
+        h.className = "heart";
+        h.innerText = "❤️";
+        h.style.left = Math.random()*100 + "vw";
+        h.style.animationDuration = (Math.random()*3 + 3) + "s";
+        document.body.appendChild(h);
+
+        let t = document.createElement("div");
+        t.className = "loveText";
+        t.innerText = "I love u";
+        t.style.left = Math.random()*100 + "vw";
+        t.style.animationDuration = (Math.random()*3 + 3) + "s";
+        t.style.fontSize = "28px";
+        t.style.color = "#ff1a1a";
+        document.body.appendChild(t);
+    }, 300);
+};
+</script>
+</body>
+</html>
